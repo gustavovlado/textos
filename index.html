@@ -1,1 +1,112 @@
 
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Extrator de Palavras-chave</title>
+  <style>
+    body {
+      background-color: #000;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      color: red;
+      text-shadow: 0 0 10px white;
+      margin-top: 40px;
+      font-size: 2.5em;
+    }
+
+    textarea {
+      width: 80%;
+      height: 150px;
+      margin-top: 30px;
+      padding: 10px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      resize: none;
+      background-color: #222;
+      color: #fff;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 30px;
+      font-size: 1.1em;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background-color: #ff3333;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #ff3333aa;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #ff3333;
+    }
+
+    .output {
+      width: 80%;
+      margin-top: 30px;
+      background-color: #111;
+      padding: 15px;
+      border-radius: 5px;
+      min-height: 80px;
+      font-size: 1em;
+      white-space: pre-wrap;
+    }
+
+    .label {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #ff6666;
+    }
+  </style>
+</head>
+<body>
+  <h1>EXTRATOR DE PALAVRAS-CHAVE</h1>
+
+  <div class="label">Digite ou cole seu texto aqui:</div>
+  <textarea id="inputText" placeholder="Digite ou cole seu texto aqui..."></textarea>
+
+  <button onclick="extrairPalavras()">EXTRAIR</button>
+
+  <div class="label">Texto extraído:</div>
+  <div class="output" id="outputArea"></div>
+
+  <script>
+    function extrairPalavras() {
+      const texto = document.getElementById("inputText").value;
+      const palavras = texto
+        .toLowerCase()
+        .replace(/[.,!?;:(){}[\]"']/g, '')
+        .split(/\s+/)
+        .filter(p => p.length > 3 && !stopWords.includes(p));
+      
+      const unicas = [...new Set(palavras)];
+
+      document.getElementById("outputArea").innerText = unicas.join(', ');
+    }
+
+    const stopWords = [
+      'para', 'com', 'como', 'isso', 'esta', 'essa', 'aquele', 'dessa', 'nessa', 'entre',
+      'sobre', 'depois', 'antes', 'também', 'porque', 'quando', 'enquanto', 'tudo',
+      'todo', 'toda', 'mais', 'menos', 'onde', 'qual', 'quais', 'nos', 'nas', 'das',
+      'dos', 'ele', 'ela', 'eles', 'elas', 'você', 'vocês', 'nosso', 'nossa', 'seu', 'sua',
+      'meu', 'minha', 'isso', 'aquele', 'aquela', 'tem', 'está', 'ser', 'foi', 'são'
+    ];
+  </script>
+</body>
+</html>
